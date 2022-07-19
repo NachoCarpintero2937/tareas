@@ -1,0 +1,248 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+$md-mcgpalette0: (
+    50 : #e9f0e9,
+    100 : #c8d9c8,
+    200 : #a3bfa3,
+    300 : #7ea57e,
+    400 : #639262,
+    500 : #477f46,
+    600 : #40773f,
+    700 : #376c37,
+    800 : #2f622f,
+    900 : #204f20,
+    A100 : #92ff92,
+    A200 : #5fff5f,
+    A400 : #2cff2c,
+    A700 : #13ff13,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$tareas-primary: mat-palette($md-mcgpalette0);
+$tareas-accent: mat-palette($md-mcgpalette0);
+:root {
+  --high: #e54444;
+  --medium: #e9d213;
+  --low: #1e90ff;
+}
+// The warn palette is optional (defaults to red).
+$tareas-warn: mat-palette($md-mcgpalette0);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$tareas-theme: mat-light-theme((
+  color: (
+    primary: $tareas-primary,
+    accent: $tareas-accent,
+    warn: $tareas-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($tareas-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body {
+   margin: 0; 
+   font-family: 'CaviarDreams'!important;
+   background-color: #f3f3f3;
+   }
+
+// btn
+.btn{
+  border-radius: 0px!important;
+  background: #6d994c!important;
+  color:white!important;
+  font-weight: 100!important;
+  width: 100%;
+}
+
+.container{
+  padding:60px 60px 10px 60px;
+}
+
+// Cols
+.col-12{
+  width: 100%;
+}
+.col-6{
+  width: 50%;
+}
+.col-3{
+width: 30%;
+}
+// Paddings
+.pd-3{
+  padding: 5px;;
+}
+.pd-5{
+  padding: 10px;
+}
+// Flex
+.d_flex{
+  display: flex;
+}
+.align_items_center{
+  align-items: center;
+}
+.justify_content_center{
+  justify-content: center;
+}
+.justify_content_flex_end{
+  justify-content: flex-end;
+}
+.justify_content_space_between{
+  justify-content: space-between;
+}
+.flex_direction_column{
+  flex-direction: column;
+}
+// centers
+.text_center{
+  text-align: center;
+}
+.text-align-start{
+  text-align: start!important;
+}
+.cursor_pointer{
+  cursor: pointer;
+}
+
+// alerts
+.error-snackbar{
+  background-color: #bf2c2c;
+  color: white;
+}
+.success-snackbar{
+  background-color: green;
+  color: white;
+  button{
+      color:white;
+  }
+}
+.container_home{
+  padding:10px 60px 10px 60px;
+}
+.mat-card-header-text {
+  height: auto;
+  margin: 0px!important;
+}
+
+// Prioridades
+#alta{
+  margin:5px;
+  .prioridad_alta{
+    color: var(--high);
+}
+}
+#media{
+  margin:5px;
+  .prioridad_media{
+      color: var(--medium);
+  }
+ }
+#baja{
+  margin:5px;
+ .prioridad_baja{
+     color: var(--low);
+ }
+}
+
+.line{
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+hr{
+  border:none;
+  border-bottom:1px  solid mat-color($tareas-primary );
+  width: 100px;
+}
+}
+.title{
+  font-size: 30px;
+  margin:5px;
+  color:#6d6868;
+}
+.spinner-container {
+  position: absolute;
+  top: -24px;
+  left: -24px;
+  display: flex;
+  width: calc(100% + 48px);
+  height: calc(100% + 48px);
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+mat-paginator{
+  background:transparent!important;
+}
+
+.add_work{
+  position: fixed;  
+  bottom: 0;  
+  right:0;
+  z-index: 100;
+  margin:40px; 
+}
+.btn:disabled{
+  background-color: #a3c18c!important;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  // box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color:mat-color($tareas-primary );
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: mat-color($tareas-primary );
+}

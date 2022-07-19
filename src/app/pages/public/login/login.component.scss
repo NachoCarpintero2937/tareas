@@ -1,0 +1,53 @@
+mat-card{
+    padding: 0px!important;
+    border-radius: 0px!important;
+    height: 500px;
+    box-shadow: none!important;
+    border:1px solid #ccc;
+    background-color: #fafafa;
+    border-radius: 2px!important;
+    form{ 
+        height: 100%;
+        .formulario_logo{
+            height: 100%;
+            .login{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                width: 100%;
+                padding:15px;
+                .logo{
+                    width: 500px;
+                }
+            }
+            .inputs{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                height: 60%;
+                justify-content: center;
+            }
+            .fondo_via{
+                // background-image: url('/assets/img/fondo_login2.jpg');
+                // background-size: cover;
+                background-color:#1e3944de;
+            }
+            .button_ingresar{
+                width: 95%;
+                display: flex;
+                justify-content: center;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                padding: 10px;
+                
+            }
+        }
+    }
+}
+@media screen and (max-width: 600px) {
+    .logo{
+        width: 200px!important;
+    }
+
+}

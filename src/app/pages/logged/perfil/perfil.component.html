@@ -1,0 +1,107 @@
+<div class="">
+    <!-- <div class="pd-5 d_flex">
+        <div class="line">
+            <hr class="header_hr">
+        </div>
+        <div class="title"> Mi Perfil</div>
+
+    </div> -->
+    <div class=" d_flex justify_content_center">
+        <div class="perfil">
+            <div class="background">
+                <div class="portada">
+
+                </div>
+                <div class="photo_perfil">
+                    <div class="d_flex nombres">
+                        <div>
+                            <app-iniciales color="primary" color="#62288e" fuente="white" size="70px"
+                                [text]="programador?.Programador" width="150px" height="150px" borde="5px solid">
+                            </app-iniciales>
+                        </div>
+                        <div class="nombre">
+                            <span>
+                                {{programador?.Programador}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="botones_editar">
+                        <!-- <div>
+                            <button mat-icon-button color="primary" matTooltip="Editar">
+                                <mat-icon>mode_edit_outline</mat-icon>
+                            </button>
+                        </div>
+                        <div>
+                            <button mat-icon-button color="primary" matTooltip="Editar">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                        </div> -->
+
+                    </div>
+                </div>
+            </div>
+            <div class="muro_div_principal">
+                <div class="muro">
+                    <div class="info">
+                        <mat-list>
+                            <mat-list-item class="descripcion">Fecha de ingreso</mat-list-item>
+                            <mat-list-item class="valor"> {{programador?.FechaAlta | date: 'dd/MM/yyyy'}}
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <mat-list-item class="descripcion">Última actividad</mat-list-item>
+                            <mat-list-item class="valor"> Sin datos</mat-list-item>
+                        </mat-list>
+                    </div>
+                    <hr class="vertical_hr">
+                    <div class="history">
+                        <mat-list>
+                            <cdk-virtual-scroll-viewport itemSize="5" class="example-viewport">
+                                <div *cdkVirtualFor="let estado of estados" class="example-item">
+                                    <mat-list-item>
+                                        <div class="d_flex listado_muro"
+                                            [routerLink]="['/logged/ver-tarea' ,'VB-'+ estado?.IdPedido]" [matTooltip]="estado?.Fecha | date: 'dd/MM/yyyy
+                                            H:mm:ss'">
+                                            <div class="nombre_inicial d_flex">
+                                                <div class="inicial_muro">
+                                                    <app-iniciales color="primary" color="#62288e" fuente="white"
+                                                        size="11px" [text]="programador?.Programador" width="30px"
+                                                        height="30px" borde="3px solid #ccc">
+                                                    </app-iniciales>
+                                                </div>
+                                                <div class="nombre_muro">
+                                                    {{programador?.Programador}}
+                                                </div>
+                                            </div>
+                                            <div class="d_flex descripcion_muro">
+                                                ha cambiado de estado la tarea VB-{{estado?.IdPedido}} a
+                                                <b>&nbsp;{{estado?.Estado}}</b>
+
+                                            </div>
+                                            <div class="pd-5">
+                                                <span class="material-icons icono_accion">
+                                                    {{estado?.Estado == 'Finalizado' ? 'check_circle_outline' :
+                                                    'compare_arrows' }}
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </mat-list-item>
+                                    <!-- <mat-divider></mat-divider> -->
+                                </div>
+                            </cdk-virtual-scroll-viewport>
+                        </mat-list>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="cargando.length > 0" class="spinner-container" style="background: #fff;
+        opacity: 0.8;">
+        <div class="d_flex flex_direction_column">
+            <div class="d_flex justify_content_center">
+                Cargando...
+
+            </div>
+            <img src="./assets/img/loading.gif" width="200">
+        </div>
+    </div>

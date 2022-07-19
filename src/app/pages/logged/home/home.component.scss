@@ -1,0 +1,234 @@
+@import '~@angular/material/theming';
+@import '../../../../styles.scss';
+
+.container_home{
+    padding:10px 60px 10px 60px;
+    .title_page{
+    padding: 10px;
+    font-size: 30px;
+    color: #477f46;
+    }
+    .filtros{
+        display: flex;
+        justify-content: center;
+        .input_filtros{
+            display:flex;
+            justify-content: center;
+            width:100%;
+            .btn_filtro{
+                padding:5px;
+                border-radius: 50%;
+                height: 30px;
+                width: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor:pointer;
+                                .material-icons{
+                    color:mat-color($tareas-primary);
+                    }
+            }
+            .btn_filtro:active{
+                box-shadow: 0px 1px 6px 0px rgb(0 0 0 / 75%);
+            }
+            .btn_filtro:hover{
+                background-color: mat-color($tareas-primary, 100);
+              .material-icons{
+                color:mat-color($tareas-primary, 50);
+              }
+            }
+        
+        }
+    }
+    
+    .home{
+        background-color: #f3f3f3;
+        display:flex;
+    }
+    .estado{
+        width: 33%;
+        display: flex;
+        flex-direction: column;
+        margin:10px;
+        background-color:#e3e3e3 ;
+        border-radius: 5px;
+        .estado_titulo{
+            font-size: 14px;
+            margin-top: 0;
+            padding: 10px;
+            height: 40px;
+            color: #575757;
+            font-weight: 500;
+            font-family: 'CaviarDreams'!important;
+            font-weight: 600;
+            border-radius: 3px;
+            line-height: 37px;
+            display: flex;
+            justify-content: space-between;
+            div>span{
+                font-size:17px;
+                color:#747070;
+            }
+            .contador{
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                border:1px solid mat-color($tareas-primary);;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 10px;
+                color:mat-color($tareas-primary);
+            }
+        }
+        .panel{
+            min-height: 270px;
+            padding-top: 30px;
+            margin-top: -16px;
+            padding-bottom: 30px;
+            margin-bottom: 20px;
+            height: calc(90% - 18px);
+        mat-card{
+            margin:10px;
+            cursor:pointer;
+            mat-card-header{
+              .titulo{
+                  font-size: 18px;
+                  width: 200px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              }
+              .tipos_prioridad{
+                  display: flex!important;
+                  #alta{
+                      margin:5px;
+                      .prioridad_alta{
+                        color: var(--high);
+                    }
+                  }
+               #media{
+                margin:5px;
+                .prioridad_media{
+                    color: var(--medium);
+                }
+               }
+                 #baja{
+                     margin:5px;
+                    .prioridad_baja{
+                        color: var(--low);
+                    }
+                 }
+              
+              }
+            }
+            mat-card-content{
+                .descripcion{
+                    width:200px;
+                    margin-top:15px;
+                    font-size: 14px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    color:#8e8787;
+                }
+                .id_tarea{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin:5px;
+                    font-size: 15px;
+                    color:#ccc;
+                }
+                .iniciales{
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                }
+            }
+        }
+        }
+    }
+    ::ng-deep   mat-card-heade .mat-card-header-text {
+        margin: 0 !important;
+    }
+}
+.cdk-drag-preview{
+  mat-card{
+    margin:10px;
+    mat-card-header{
+        .titulo{
+            font-size: 18px;
+            width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .tipos_prioridad{
+            display: flex!important;
+            #alta{
+                margin:5px;
+                .prioridad_alta{
+                  color: var(--high)!important;
+              }
+            }
+         #media{
+          margin:5px;
+          .prioridad_media{
+              color: var(--medium)!important;
+          }
+         }
+           #baja{
+               margin:5px;
+              .prioridad_baja{
+                  color: var(--low)!important;
+              }
+           }
+        
+        }
+      }
+      mat-card-content{
+                  .descripcion{
+                    width:200px;
+            font-size: 14px;
+            margin-top:15px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color:#8e8787;
+        }
+        .id_tarea{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin:5px;
+            font-size: 15px;
+            color:#ccc;
+        }
+        .iniciales{
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        
+      }
+  }
+}
+.card-finalizado{
+    background-color: #e8e8e8;
+}
+
+@media screen and (max-width: 600px) {
+    .home{
+        flex-direction: column;
+        .estado{
+            width: 100%!important;
+        }
+    }
+    .filtro_media{
+        width: 100%;
+    }
+}
+.div_tarea{
+    height: 30px;
+}

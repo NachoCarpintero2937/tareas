@@ -1,0 +1,116 @@
+<div class="header_ col-12 padding">
+    <h1 mat-dialog-title class="text-align-center " style="   font-family: 'CaviarDreams'!important;">
+        {{ data?.edit ? 'Editando' : 'Agregar'}} Tarea
+    </h1>
+    <div *ngIf="data?.edit" class="d_flex">
+        <div class="pd-5">
+            <a mat-icon-button [routerLink]="['/logged/ver-tarea' ,'VB-'+ tarea_id] " target="_blank" color="primary"
+                matTooltip="Abrir en una nueva ventana">
+                <mat-icon>tab</mat-icon>
+            </a>
+        </div>
+        <div class="pd-5">
+            <button mat-icon-button color="primary" (click)="copy()" matTooltip="Copiar URL">
+                <mat-icon>link</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+<form [formGroup]="form">
+
+    <div mat-dialog-content>
+        <div>
+            <mat-form-field class="col-12 pd-5">
+                <mat-label>Descripcion</mat-label>
+                <textarea matInput formControlName="Pedido"></textarea>
+            </mat-form-field>
+            <mat-form-field class="col-12 pd-5">
+                <mat-label>Programador</mat-label>
+                <mat-select formControlName="IdProgramador">
+                    <mat-option>
+                        Seleccionar
+                    </mat-option>
+                    <mat-option *ngFor="let programador of programadores" [value]="programador?.IdProgramador">
+                        {{programador?.Programador}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-12 pd-5">
+                <mat-label>Prioridad</mat-label>
+                <mat-select formControlName="Prioridad">
+                    <mat-option [value]="_globalsSv.ALTA">
+
+                        <div id="alta" class="d_flex align_items_center ">
+
+                            <span class="pd-3">ALTA</span>
+                        </div>
+                    </mat-option>
+                    <mat-option [value]="_globalsSv.MEDIA">
+                        <div id="media" class="d_flex align_items_center ">
+
+                            <span class="pd-3">MEDIA</span>
+                        </div>
+
+                    </mat-option>
+                    <mat-option [value]="_globalsSv.BAJA">
+                        <div id="baja" class="d_flex align_items_center ">
+
+                            <span class="pd-3">BAJA</span>
+                        </div>
+
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-12 pd-5" *ngIf="data?.edit">
+                <mat-label>Estado</mat-label>
+                <mat-select formControlName="IdEstado">
+                    <mat-option *ngFor="let estado of estados" [value]="estado?.IdEstado">
+                        {{estado?.Estado}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-12 pd-5">
+                <mat-label>Usuario Pedido</mat-label>
+                <mat-select formControlName="IdUsuarioPedido">
+                    <mat-form-field class="col-12">
+                        <mat-label>Buscar...</mat-label>
+                        <input (keyup)="onKey($event.target.value)" matInput>
+                    </mat-form-field>
+                    <mat-option *ngFor="let state of selectedStates" [value]="state.IdUsuario">{{state.Nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-12 pd-5">
+                <mat-label>Sistema</mat-label>
+                <mat-select formControlName="IdSistema">
+                    <mat-option>Seleccionar</mat-option>
+                    <mat-option *ngFor="let sistema of sistemas" [value]="sistema?.IdSistema">
+
+                        {{sistema?.Descripcion}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </div>
+
+    </div>
+    <div mat-dialog-actions class=" d_flex justify_content_center">
+        <div class="pd-5">
+            <button mat-button (click)="submit();" class="btn_save" color="primary"
+                [disabled]="!form.valid">Guardar</button>
+        </div>
+        <div class="pd-5">
+            <button mat-button (click)="onNoClick();" class="cerrar-dialog">Cerrar</button>
+        </div>
+    </div>
+</form>
+<div *ngIf="cargando.length > 0" class="spinner-container" style="background: #fff;
+    opacity: 0.8;">
+    <div class="d_flex flex_direction_column">
+        <div class="d_flex justify_content_center">
+            Cargando...
+
+        </div>
+        <img src="./assets/img/loading.gif" width="200">
+    </div>
+</div>

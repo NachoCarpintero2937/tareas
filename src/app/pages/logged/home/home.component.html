@@ -1,0 +1,254 @@
+<div class="container_home">
+    <!-- <div class="title_page">
+        Tablero de {{usuario?.data?.usuario_descripcion}}
+    </div> -->
+    <div class="filtros">
+        <div class="input_filtros align_items_center">
+            <form [formGroup]="form" class="d_flex col-12 align_items_center justify_content_center">
+                <mat-form-field class="col-3 pd-5 filtro_media">
+                    <mat-label>Filtro por descripción</mat-label>
+                    <input matInput (keyup)="filtros($event,'descripcion');" formControlName="Descripcion">
+                </mat-form-field>
+                <div class="d_flex">
+                    <div class="btn_filtro">
+                        <span class="material-icons " color="primary" (click)="filtros($event,'descripcion'); ">
+                            search
+                        </span>
+                    </div>
+                    <div class="btn_filtro" *ngIf="hay_filtros">
+                        <span class="material-icons " (click)="clean_filters(); " matTooltip="Eliminar filtros">
+                            highlight_off
+                        </span>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="home" cdkDropListGroup>
+        <div class="estado">
+            <div class="estado_titulo">
+                <div>
+                    <span>Por hacer</span>
+                </div>
+                <div class="contador">
+                    {{porhacer.length}}
+                </div>
+            </div>
+            <div cdkDropList #PorHacerList="cdkDropList" [cdkDropListData]="porhacer" id="por-hacer"
+                [cdkDropListConnectedTo]="[EnCursoList]" (cdkDropListDropped)="drop($event)" class="panel">
+                <div *ngFor="let item of porhacer;let i = index" cdkDrag>
+                    <div id="tarea-{{item.IdPedido}}">
+                        <mat-card [routerLink]="['/logged/ver-tarea' ,'VB-'+ item?.IdPedido]">
+                            <mat-card-header>
+                                <div class="d_flex justify_content_space_between col-12 div_tarea">
+                                    <div class="titulo">Tarea VB-{{ item?.IdPedido}}</div>
+                                    <div class="tipos_prioridad">
+                                        <div id="alta" *ngIf="item?.Prioridad == 1">
+                                            <span class="material-icons prioridad_alta" matTooltip="Prioridad alta">
+                                                arrow_circle_up
+                                            </span>
+                                        </div>
+                                        <div id="media" *ngIf="item?.Prioridad == 2">
+                                            <span class="material-icons prioridad_media" matTooltip="Prioridad media">
+                                                close_fullscreen
+                                            </span>
+                                        </div>
+                                        <div id="baja" *ngIf="item?.Prioridad == 3">
+                                            <span class="material-icons prioridad_baja" matTooltip="Prioridad baja">
+                                                arrow_circle_down
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <div class="descripcion">
+                                    {{item?.Pedido}}
+                                </div>
+                                <div class="col-12 iniciales">
+                                    <div class="id_tarea">
+                                        VB-{{item?.IdPedido}}
+                                    </div>
+                                    <app-iniciales color="primary" color="#62288e" fuente="white" size="11px"
+                                        [text]="item?.Programador" width="30px" height="30px">
+                                    </app-iniciales>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- En curso -->
+        <div class="estado">
+            <div class="estado_titulo">
+                <div>
+                    <span>En Curso</span>
+                </div>
+                <div class="contador">
+                    {{encurso.length}}
+                </div>
+
+            </div>
+            <div cdkDropList #EnCursoList="cdkDropList" [cdkDropListData]="encurso" id="en-curso"
+                [cdkDropListConnectedTo]="[PorHacerList]" (cdkDropListDropped)="drop($event)" class="panel">
+                <div *ngFor="let item of encurso;let i = index" cdkDrag>
+                    <mat-card [routerLink]="['/logged/ver-tarea' ,'VB-'+ item?.IdPedido]">
+                        <mat-card-header>
+                            <div class="d_flex justify_content_space_between col-12 div_tarea">
+                                <div class="titulo">Tarea VB-{{ item?.IdPedido}}</div>
+                                <div class="tipos_prioridad">
+                                    <div id="alta" *ngIf="item?.Prioridad == 1">
+                                        <span class="material-icons prioridad_alta" matTooltip="Prioridad alta">
+                                            arrow_circle_up
+                                        </span>
+                                    </div>
+                                    <div id="media" *ngIf="item?.Prioridad == 2">
+                                        <span class="material-icons prioridad_media" matTooltip="Prioridad media">
+                                            close_fullscreen
+                                        </span>
+                                    </div>
+                                    <div id="baja" *ngIf="item?.Prioridad == 3">
+                                        <span class="material-icons prioridad_baja" matTooltip="Prioridad baja">
+                                            arrow_circle_down
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <div class="descripcion">
+                                {{item?.Pedido}}
+                            </div>
+                            <div class="col-12 iniciales">
+                                <div class="id_tarea">
+                                    VB-{{item?.IdPedido}}
+                                </div>
+                                <app-iniciales color="primary" color="#62288e" fuente="white" size="11px"
+                                    [text]="item?.Programador" width="30px" height="30px">
+                                </app-iniciales>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <div class="estado">
+            <div class="estado_titulo">
+                <div>
+                    <span>Testing</span>
+                </div>
+                <div class="contador">
+                    {{testing.length}}
+                </div>
+
+            </div>
+            <div>
+                <div cdkDropList #TestingList="cdkDropList" [cdkDropListData]="testing" id="testing"
+                    [cdkDropListConnectedTo]="[PorHacerList,EnCursoList,FinalizadoList]"
+                    (cdkDropListDropped)="drop($event)" class="panel">
+                    <div *ngFor="let item of testing;let i = index" cdkDrag>
+                        <mat-card [routerLink]="['/logged/ver-tarea' ,'VB-'+ item?.IdPedido]">
+                            <mat-card-header>
+                                <div class="d_flex justify_content_space_between col-12 div_tarea">
+                                    <div class="titulo">Tarea VB-{{ item?.IdPedido}}</div>
+                                    <div class="tipos_prioridad">
+                                        <div id="alta" *ngIf="item?.Prioridad == 1">
+                                            <span class="material-icons prioridad_alta" matTooltip="Prioridad alta">
+                                                arrow_circle_up
+                                            </span>
+                                        </div>
+                                        <div id="media" *ngIf="item?.Prioridad == 2">
+                                            <span class="material-icons prioridad_media" matTooltip="Prioridad media">
+                                                close_fullscreen
+                                            </span>
+                                        </div>
+                                        <div id="baja" *ngIf="item?.Prioridad == 3">
+                                            <span class="material-icons prioridad_baja" matTooltip="Prioridad baja">
+                                                arrow_circle_down
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <div class="descripcion">
+                                    {{item?.Pedido}}
+                                </div>
+                                <div class="col-12 iniciales">
+                                    <div class="id_tarea">
+                                        VB-{{item?.IdPedido}}
+                                    </div>
+                                    <app-iniciales color="primary" color="#62288e" fuente="white" size="11px"
+                                        [text]="item?.Programador" width="30px" height="30px">
+                                    </app-iniciales>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="estado">
+            <div class="estado_titulo">
+                <div>
+                    <span>Finalizado</span>
+                </div>
+                <div class="contador">
+                    {{finalizado.length}}
+                </div>
+
+            </div>
+            <div>
+                <div cdkDropList #FinalizadoList="cdkDropList" [cdkDropListData]="finalizado" id="finalizado"
+                    [cdkDropListConnectedTo]="[PorHacerList,EnCursoList,TestingList]"
+                    (cdkDropListDropped)="drop($event)" class="panel">
+                    <div *ngFor="let item of finalizado;let i = index" cdkDrag>
+                        <mat-card [routerLink]="['/logged/ver-tarea' ,'VB-'+ item?.IdPedido]" class="card-finalizado">
+                            <mat-card-header>
+                                <div class="d_flex justify_content_space_between col-12 div_tarea">
+                                    <div class="titulo">Tarea VB-{{ item?.IdPedido}}</div>
+                                    <div class="tipos_prioridad">
+                                        <div id="alta" *ngIf="item?.Prioridad == 1">
+                                            <span class="material-icons prioridad_alta" matTooltip="Prioridad alta">
+                                                arrow_circle_up
+                                            </span>
+                                        </div>
+                                        <div id="media" *ngIf="item?.Prioridad == 2">
+                                            <span class="material-icons prioridad_media" matTooltip="Prioridad media">
+                                                close_fullscreen
+                                            </span>
+                                        </div>
+                                        <div id="baja" *ngIf="item?.Prioridad == 3">
+                                            <span class="material-icons prioridad_baja" matTooltip="Prioridad baja">
+                                                arrow_circle_down
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <div class="descripcion">
+                                    {{item?.Pedido}}
+                                </div>
+                                <div class="col-12 iniciales">
+                                    <div class="id_tarea">
+                                        VB-{{item?.IdPedido}}
+                                    </div>
+                                    <app-iniciales color="primary" color="#62288e" fuente="white" size="11px"
+                                        [text]="item?.Programador" width="30px" height="30px">
+                                    </app-iniciales>
+                                </div>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="add_work">
+    <app-agregar-tarea (onCerrado)="cerro()"></app-agregar-tarea>
+</div>

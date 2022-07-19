@@ -1,0 +1,29 @@
+<div class="header_ col-12 padding">
+    <h1 mat-dialog-title class="text-align-center " style="   font-family: 'CaviarDreams'!important;">
+        Ver imagen
+    </h1>
+
+</div>
+
+<div mat-dialog-content>
+    <div class="col-12 d_flex justify_content_center align_items_center">
+        <img [src]="data?.base64" width="500">
+    </div>
+
+</div>
+<div mat-dialog-actions class=" d_flex justify_content_center">
+
+    <div class="pd-5">
+        <button mat-button (click)="onNoClick();" class="cerrar-dialog">Cerrar</button>
+    </div>
+</div>
+<div *ngIf="cargando.length > 0" class="spinner-container" style="background: #fff;
+    opacity: 0.8;">
+    <div class="d_flex flex_direction_column">
+        <div class="d_flex justify_content_center">
+            Cargando...
+
+        </div>
+        <img src="./assets/img/loading.gif" width="200">
+    </div>
+</div>

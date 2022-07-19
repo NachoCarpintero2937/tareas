@@ -1,0 +1,112 @@
+<div class="d_flex">
+    <div class="container_home col_personalizado">
+        <div class="pd-5 d_flex">
+            <div class="line">
+                <hr>
+            </div>
+            <div class="title">Información</div>
+        </div>
+        <div>
+            <div class="d_flex justify_content_center">
+                <div class="card_">
+                    <mat-card>
+                        <mat-card-content>
+                            <div>
+                                <div class="div_title_tarea">
+                                    <div class="title_tarea">
+                                        <span>
+                                            Tarea VB-{{tarea?.IdPedido}}
+                                        </span>
+                                    </div>
+                                    <div class="prioridad">
+                                        <div class="id">
+                                            VB-{{tarea?.IdPedido}}
+                                        </div>
+                                        <div id="alta" *ngIf="tarea?.Prioridad == 1">
+                                            <span class="material-icons prioridad_alta" matTooltip="Prioridad alta">
+                                                arrow_circle_up
+                                            </span>
+                                        </div>
+                                        <div id="media" *ngIf="tarea?.Prioridad == 2">
+                                            <span class="material-icons prioridad_media" matTooltip="Prioridad media">
+                                                close_fullscreen
+                                            </span>
+                                        </div>
+                                        <div id="baja" *ngIf="tarea?.Prioridad == 3">
+                                            <span class="material-icons prioridad_baja" matTooltip="Prioridad baja">
+                                                arrow_circle_down
+                                            </span>
+                                        </div>
+                                        <div class="div-editar">
+                                            <app-agregar-tarea [id]="tarea?.IdPedido" width="30px" height="30px"
+                                                font_size="15px" (onCerrado)="getTarea(tarea?.IdPedido)">
+                                            </app-agregar-tarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="descripcion_tarea">
+                                    {{tarea?.Pedido}}
+                                </div>
+                                <div class="info_tarea">
+                                    <div class="asignacion">
+                                        <span class="descripcion text-align-start">
+                                            Sistema
+                                        </span>
+                                        <span class="valor">
+                                            {{tarea?.Sistema}}
+                                        </span>
+                                    </div>
+                                    <div class="asignacion">
+                                        <span class="descripcion">
+                                            Responsable
+                                        </span>
+                                        <span class="valor">
+                                            {{tarea?.Programador ? tarea?.Programador : 'Sin asignar'}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                    <!-- Detalles -->
+                    <div>
+                        <div class="pd-5 d_flex" style="margin: 17px 0px 17px 0px;">
+                            <div class="line">
+                                <hr>
+                            </div>
+                            <div class="title">Detalles</div>
+                        </div>
+                        <app-detalles-tarea [id]="id"></app-detalles-tarea>
+                    </div>
+                    <!-- Estados -->
+                    <div>
+                        <div class="pd-5 d_flex" style="margin: 17px 0px 17px 0px;">
+                            <div class="line">
+                                <hr>
+                            </div>
+                            <div class="title">Historial de estados</div>
+                        </div>
+                        <app-historial-estados [id]="id"></app-historial-estados>
+                    </div>
+                    <!-- Comentarios -->
+                    <div class="pd-5 d_flex">
+                        <div class="line">
+                            <hr>
+                        </div>
+                        <div class="title">Comentarios</div>
+                    </div>
+                    <app-comentarios-tarea [id]="id"></app-comentarios-tarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="cargando.length > 0" class="spinner-container" style="background: #fff;
+        opacity: 0.8;">
+        <div class="d_flex flex_direction_column">
+            <div class="d_flex justify_content_center">
+                Cargando...
+            </div>
+            <img src="./assets/img/loading.gif" width="200">
+        </div>
+    </div>
+</div>

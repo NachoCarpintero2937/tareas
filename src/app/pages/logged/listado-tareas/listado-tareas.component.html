@@ -1,0 +1,170 @@
+<div class="container_home">
+    <div class="pd-5 d_flex">
+        <div class="line">
+            <hr>
+        </div>
+        <div class="title">Listado de tareas</div>
+    </div>
+    <div class="pd-5">
+        <mat-progress-bar mode="indeterminate" *ngIf="cargando.length > 0">
+        </mat-progress-bar>
+        <mat-card>
+            <mat-card-content>
+                <mat-expansion-panel #filtrosPanel class="mat-elevation-z0">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title style="align-items: center;">
+                            <div class="title-general">
+                                <span class="material-icons icon-padding">
+                                    filter_alt
+                                </span> Filtros
+                                <div>
+                                    <button mat-button class="btn_reset" color="primary"
+                                        (click)="$event.stopPropagation();reset();">Resetear
+                                        filtros</button>
+                                </div>
+                            </div>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="tabla-ver-filtro-row">
+                        <form [formGroup]="form">
+                            <div class="filtros">
+                                <mat-form-field class="col-6 pd-5">
+                                    <mat-label>Prioridad</mat-label>
+                                    <mat-select formControlName="Prioridad"
+                                        (selectionChange)="filtros($event,'prioridad');">
+                                        <!-- <mat-option>Seleccionar</mat-option> -->
+                                        <mat-option [value]="_globalsSv.ALTA">ALTA</mat-option>
+                                        <mat-option [value]="_globalsSv.MEDIA">MEDIA</mat-option>
+                                        <mat-option [value]="_globalsSv.BAJA">BAJA</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field class="col-6 pd-5">
+                                    <mat-label>Estado</mat-label>
+                                    <mat-select formControlName="IdEstado"
+                                        (selectionChange)="filtros($event,'estado');">
+                                        <!-- <mat-option>Seleccionar</mat-option> -->
+                                        <mat-option *ngFor="let estado of estados" [value]="estado?.IdEstado">
+                                            {{estado?.Estado}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field class="col-6 pd-5">
+                                    <mat-label>Programadores</mat-label>
+                                    <mat-select formControlName="IdProgramador"
+                                        (selectionChange)="filtros($event,'programador');">
+                                        <!-- <mat-option>Seleccionar</mat-option> -->
+                                        <mat-option *ngFor="let programador of programadores"
+                                            [value]="programador?.IdProgramador">{{programador?.Programador}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field class="col-6 pd-5">
+                                    <mat-label>Sistemas</mat-label>
+                                    <mat-select formControlName="IdSistema"
+                                        (selectionChange)="filtros($event,'sistemas');">
+                                        <!-- <mat-option>Seleccionar</mat-option> -->
+                                        <mat-option *ngFor="let sistema of sistemas" [value]="sistema?.IdSistema">
+                                            {{sistema?.Descripcion}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field class="col-6 pd-5">
+                                    <mat-label>Descripción</mat-label>
+                                    <input type="text" matInput formControlName="Descripcion"
+                                        (keyup)="filtros($event,'descripcion');">
+                                </mat-form-field>
+
+                            </div>
+                        </form>
+
+                    </div>
+                </mat-expansion-panel>
+                <mat-table matSort [dataSource]="list">
+                    <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header># ID
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{element.IdPedido}}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="descripcion">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{element.Pedido}}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="asignado">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Asignación
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{element?.Programador ? element?.Programador : 'Sin asignar'}}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="prioridad">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Prioridad
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="prioridad alta" *ngIf="element?.Prioridad == 1">
+                                Alta
+                            </span>
+                            <span class="prioridad media" *ngIf="element?.Prioridad == 2">
+                                Media
+                            </span>
+                            <span class="prioridad baja" *ngIf="element?.Prioridad == 3">
+                                Baja
+                            </span>
+                            <span *ngIf="!element?.Prioridad">
+                                Sin prioridad
+                            </span>
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="sistema">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Sistema
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{element.Sistema}}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="estado">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Estado
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{!element.Estado ? 'Sin estado' : element?.Estado}}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="fecha">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            {{element.FechaAlta | date: 'dd/MM/yyyy
+                            H:mm:ss'}}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="Acciones">
+                        <mat-header-cell *matHeaderCellDef>Acciones
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <app-agregar-tarea [id]="element?.IdPedido" width="30px" height="30px" font_size="15px"
+                                (onCerrado)="_getTareas(filters)">
+                            </app-agregar-tarea>
+                            <a mat-icon-button [routerLink]="['/logged/ver-tarea' ,'VB-'+ element?.IdPedido] "
+                                target="_blank" color="primary" matTooltip="Abrir en una nueva ventana">
+                                <mat-icon>tab</mat-icon>
+                            </a>
+                        </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="columnas">
+                    </mat-header-row>
+                    <mat-row *matRowDef="let row; columns: columnas;let i= index">
+                    </mat-row>
+                </mat-table>
+                <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 50]">
+                </mat-paginator>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+<div class="add_work">
+    <app-agregar-tarea (onCerrado)="cerro()"></app-agregar-tarea>
+</div>

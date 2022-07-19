@@ -1,0 +1,59 @@
+<div class="col-md-12" style="margin: 17px 0px 17px 0px;">
+    <mat-card>
+        <mat-card-content>
+            <div class="d_flex justify_content_space_between pd-5">
+                <div class="title_listado_detalle">
+                    Listado de detalles
+                </div>
+                <app-agregar-detalle [id]="id" (onCerrado)="getDetalles(id)" width="30px" height="30px"
+                    font_size="15px">
+                </app-agregar-detalle>
+            </div>
+            <div class="d_flex justify_content_space_between align_items_center">
+                <div *ngIf="detalles.length > 0;else sindetalle">
+                    <div *ngFor="let detalle of detalles" class="d_flex flex_direction_column">
+                        <div *ngIf="detalle?.Programador">
+                            <div class="nombre_programador">
+                                <div class="iniciales">
+                                    <app-iniciales color="primary" color="#477f46" fuente="white" size="11px"
+                                        [text]="detalle?.Programador" width="30px" height="30px" borde="3px solid #ccc"
+                                        [matTooltip]="detalle?.Programador">
+                                    </app-iniciales>
+                                </div>
+                                <span>
+                                    {{detalle?.Programador}}
+                                </span>
+                            </div>
+
+                        </div>
+                        <div class="d_flex div_detalle">
+                            <div class="detalle">
+                                <span class="title_detalle" [innerHTML]="detalle?.Detalle"
+                                    *ngIf="detalle?.Tipo != 2;else img">
+                                </span>
+                                <ng-template #img class="d_flex title_detalle">
+                                    <span class="title_detalle cursor_pointer imagen_"
+                                        (click)="abrirImagen(detalle?.Detalle)">
+                                        Imagen
+                                    </span>
+                                    <span class="material-icons" (click)="abrirImagen(detalle?.Detalle)">
+                                        collections_bookmark
+                                    </span>
+                                </ng-template>
+                            </div>
+                            <span class="fecha_detalle">{{detalle?.Fecha | date: 'dd/MM/yyyy
+                                H:mm:ss'}}</span>
+                        </div>
+                        <!-- <mat-divider></mat-divider> -->
+                    </div>
+                </div>
+
+            </div>
+            <ng-template #sindetalle>
+                <div class="no-data">
+                    No hay detalles en esta tarea
+                </div>
+            </ng-template>
+        </mat-card-content>
+    </mat-card>
+</div>

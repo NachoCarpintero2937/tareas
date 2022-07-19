@@ -1,0 +1,56 @@
+<!-- Estado -->
+<div class="estados" id="estados">
+    <div>
+        <div class="col-md-12">
+            <mat-card>
+                <mat-card-content>
+                    <div class="d_flex justify_content_space_between cursor_pointer">
+                        <div class="title_listado_detalle pd-5 no-imprimir">
+                            <span>
+                                Listado de estados
+                            </span>
+
+                        </div>
+                        <div class="d_flex no-imprimir" *ngIf="estados.length > 0">
+                            <!-- <div class="print" matTooltip="Imprimir estados"
+                                [routerLink]="['/logged/imprimir-estado' ,'VB-'+ id] "> -->
+                            <div class="print" matTooltip="Imprimir estados" (click)="imprimir()">
+                                <span class=" material-icons">
+                                    print
+                                </span>
+                            </div>
+                            <div class="title_listado_detalle pd-5 minMax"
+                                (click)="minimize = !minimize ? true : false">
+                                <span class="material-icons ">
+                                    {{!minimize ? 'expand_less' : 'expand_more'}}
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12" *ngIf="!minimize">
+                        <ul class="sessions" *ngIf="estados.length > 0;else sinestado">
+                            <li *ngFor="let estado of estados">
+                                <div class="panel-estados">
+                                    <div class="time"> {{estado?.Fecha | date: 'dd/MM/yyyy
+                                        H:mm:ss'}}
+                                    </div>
+                                    <p><b>{{estado?.Estado}}</b></p>
+                                    <p class="programador">{{estado?.Programador}}</p>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+
+                    <ng-template #sinestado>
+                        <div class="no-data">
+                            No hay estados en esta tarea
+                        </div>
+                    </ng-template>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

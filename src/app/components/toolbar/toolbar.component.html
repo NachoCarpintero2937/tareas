@@ -1,0 +1,43 @@
+<mat-toolbar class="toolbar" *ngIf="!view_toolbar">
+    <div class="d_flex justify_content_space_between col-12">
+        <div class="logo">
+            <div class="img">
+                <a [routerLink]="['/logged/home']" class="img">
+                    <img src="./assets/img/logo_.png" alt="Logo de via bariloche" class="img-logo">
+                </a>
+            </div>
+            <div class="botones">
+                <button mat-button color="primary" [routerLink]="['/logged/home']" matTooltip="Inicio">
+                    <span class="material-icons">
+                        home
+                    </span>
+                    Inicio
+                </button>
+                <button mat-button color="primary" [routerLink]="['/logged/listado-tareas']">
+                    <span class="material-icons" matTooltip="Listado de tareas">
+                        view_list
+                    </span>
+                    Tareas
+                </button>
+            </div>
+        </div>
+
+        <div class="logout d_flex align_items_center">
+            <div class="user" *ngIf="datos_usuarios || datos == true ">
+                <button mat-button color="primary"
+                    [routerLink]="['/logged/perfil' ,datos_usuarios?.data?.IdProgramador]">
+                    <span class="material-icons">
+                        person
+                    </span>
+                </button>
+
+            </div>
+            <button mat-button color="primary" (click)="_auth.logout()">
+                <span class="material-icons">
+                    exit_to_app
+                </span>
+                Salir
+            </button>
+        </div>
+    </div>
+</mat-toolbar>

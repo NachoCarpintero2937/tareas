@@ -1,0 +1,61 @@
+@import '~@angular/material/theming';
+@import '../../../../styles.scss';
+
+mat-card{
+    box-shadow: none!important;
+    border:1px solid #ccc;
+    border-radius: 2px!important;
+    background: transparent!important;
+    mat-table{
+        background:transparent!important;
+    }
+    mat-expansion-panel{
+        background: transparent!important;
+        .title-general {
+            padding: 10px 10px 0px 10px;
+            font-size: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color:mat-color($tareas-primary );
+            font-family: "CaviarDreams" !important;
+            justify-content: space-between;
+            .icon-padding{
+                padding-right: 10px;
+            }
+          }
+          .filtros{
+              display:flex;
+          }
+    }
+}
+.mat-cell{
+    font-family: "CaviarDreams" !important; 
+    font-weight: 600;
+}
+
+.btn_reset{
+    border:1px solid mat-color($tareas-primary );
+    margin:10px;
+    // padding:5px!important;
+    border-radius: 0px!important;
+}
+
+.prioridad{
+    padding:5px;
+    color:white;
+    background-color: #ccc;
+    border-radius: 5px;
+    width: 60px;
+    text-align: center;
+}
+.alta{
+background-color: rgb(150, 14, 14)!important;
+}
+.media{
+ background-color: #e8e821!important;
+ color:#333!important;
+}
+.baja{
+background-color: rgb(21, 21, 163);
+}

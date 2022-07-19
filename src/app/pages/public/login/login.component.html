@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="d_flex justify_content_center">
+        <mat-card class="col-md-3">
+            <form [formGroup]="form">
+                <div class="d_flex formulario_logo">
+                    <div class="login">
+                        <div class="d_flex justify_content_center">
+                            <img src="./assets/img/logo_.png" alt="Logo via bariloche" class="logo">
+                        </div>
+                        <div class="inputs">
+                            <mat-form-field class="col-12 pd-5">
+                                <mat-label>Usuario</mat-label>
+                                <input matInput formControlName="Usuario">
+                            </mat-form-field>
+                            <mat-form-field class="col-12 pd-5">
+                                <mat-label>Contraseña</mat-label>
+                                <input matInput type="password" formControlName="Clave">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="d-flex justify-content-center padding button_ingresar">
+                            <button mat-button color="primary" (click)="submit()" [disabled]="!form.valid"
+                                class="btn">Ingresar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</div>

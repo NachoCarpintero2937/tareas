@@ -1,0 +1,14 @@
+<button mat-fab class="btn_generic" color="primary" matTooltip="{{!id ? 'Agregar Tarea': 'Editar Tarea'}}"
+    (click)="submit();" [ngStyle]="{
+    'width':width,
+    'height':height
+  }" aria-label="Agregar tTarea">
+    <div *ngIf="id;else agregar">
+        <mat-icon [ngStyle]="{ 'font-size': font_size}" class="d_flex justify_content_center align_items_center">edit
+        </mat-icon>
+    </div>
+    <ng-template #agregar>
+        <mat-icon [ngStyle]="{ 'font-size': font_size}" class="d_flex justify_content_center align_items_center"> add
+        </mat-icon>
+    </ng-template>
+</button>

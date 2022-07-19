@@ -1,0 +1,58 @@
+<div class="comentarios">
+    <div class="listado_comentarios">
+        <mat-list>
+            <div *ngFor="let comentario of comentarios">
+                <mat-list-item>
+                    <div class="list_item">
+                        <div class="iniciales cursor_pointer"
+                            [routerLink]="['/logged/perfil' ,comentario?.IdProgramador]">
+                            <app-iniciales color="primary" color="#62288e" fuente="white" size="11px"
+                                [text]="comentario?.Programador" width="30px" height="30px" borde="3px solid #ccc">
+                            </app-iniciales>
+                            <div class="nombre_usuario">
+                                <span>
+                                    <b>{{comentario?.Programador}}</b>
+                                </span>
+
+                            </div>
+                        </div>
+                        <div class="d_flex align_items_center">
+                            <div class="descripcion_comentario" [matTooltip]="comentario?.Fecha | date: 'dd/MM/yyyy
+                                    H:mm:ss'">
+                                <span>
+                                    {{comentario?.Comentario}}
+
+                                </span>
+
+                            </div>
+
+                            <div>
+                                <button mat-icon-button class="btn_eliminar"
+                                    (click)="_borrarComentario(comentario?.IdComentario)"
+                                    matTooltip="Eliminar comentario">
+                                    <span class="material-icons delete_comentario">
+                                        cancel
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </mat-list-item>
+                <!-- <mat-divider></mat-divider> -->
+            </div>
+        </mat-list>
+    </div>
+    <div class="d_flex align_items_center justify_content_center">
+        <div class="inciales">
+            <app-iniciales color="primary" color="#62288e" fuente="white" size="11px"
+                [text]="usuario?.data?.Programador" width="30px" height="30px" borde="3px solid #ccc">
+            </app-iniciales>
+        </div>
+        <form [formGroup]="form" class="col-12 d_flex" (keydown.enter)="setComentarios()">
+            <mat-form-field class="textarea">
+                <mat-label>Escriba un comentario</mat-label>
+                <textarea matInput placeholder="" formControlName="Comentario"></textarea>
+            </mat-form-field>
+        </form>
+    </div>
+</div>

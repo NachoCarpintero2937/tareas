@@ -1,0 +1,67 @@
+.comentarios{
+    margin:20px;
+    .iniciales{
+        width: 100%;
+display:flex;
+margin:10px;
+.nombre_usuario{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'CaviarDreams'!important;
+    margin:5px;
+    // width: 20%;
+    span{
+        font-size: 15px;
+        color:#717070;
+    }
+    .fecha{
+        font-size: 10px!important;
+    }
+}
+    }
+    .textarea{
+        margin:10px;
+        width: 100%;
+        background-color: transparent;
+        border:0px !important;
+    }
+}
+.listado_comentarios{
+    mat-list{
+        mat-list-item{
+            height:auto!important;
+            margin: 15px;
+        }
+    }
+    .list_item{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        .descripcion_comentario{
+            width: auto;
+            span{
+                margin-left: 50px;
+                font-size: 13px;
+                padding: 10px;
+                background: #ccc;
+                border-radius: 20px;
+                font-family: 'CaviarDreams'!important;
+                font-weight: 600;
+            }
+        }
+    }
+}
+.btn_eliminar{
+    color:#ccc;
+    .delete_comentario{
+        font-size: 16px;
+    }
+}
+
+mat-list-item{
+    margin:0px!important;
+}
+::ng-deep   mat-list-item .mat-list-item-content {
+    padding: 0px!important;
+}
